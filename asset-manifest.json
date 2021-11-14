@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/my-bills-app/static/css/main.b000bd97.chunk.css",
+    "main.js": "/my-bills-app/static/js/main.7d6fe1f6.chunk.js",
+    "main.js.map": "/my-bills-app/static/js/main.7d6fe1f6.chunk.js.map",
+    "runtime-main.js": "/my-bills-app/static/js/runtime-main.ceaf4965.js",
+    "runtime-main.js.map": "/my-bills-app/static/js/runtime-main.ceaf4965.js.map",
+    "static/css/2.b186e0de.chunk.css": "/my-bills-app/static/css/2.b186e0de.chunk.css",
+    "static/js/2.c80a733e.chunk.js": "/my-bills-app/static/js/2.c80a733e.chunk.js",
+    "static/js/2.c80a733e.chunk.js.map": "/my-bills-app/static/js/2.c80a733e.chunk.js.map",
+    "static/js/3.8620938d.chunk.js": "/my-bills-app/static/js/3.8620938d.chunk.js",
+    "static/js/3.8620938d.chunk.js.map": "/my-bills-app/static/js/3.8620938d.chunk.js.map",
+    "index.html": "/my-bills-app/index.html",
+    "service-worker.js": "/my-bills-app/service-worker.js",
+    "service-worker.js.map": "/my-bills-app/service-worker.js.map",
+    "static/css/2.b186e0de.chunk.css.map": "/my-bills-app/static/css/2.b186e0de.chunk.css.map",
+    "static/css/main.b000bd97.chunk.css.map": "/my-bills-app/static/css/main.b000bd97.chunk.css.map",
+    "static/js/2.c80a733e.chunk.js.LICENSE.txt": "/my-bills-app/static/js/2.c80a733e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ceaf4965.js",
+    "static/css/2.b186e0de.chunk.css",
+    "static/js/2.c80a733e.chunk.js",
+    "static/css/main.b000bd97.chunk.css",
+    "static/js/main.7d6fe1f6.chunk.js"
+  ]
+}
