@@ -1,8 +1,8 @@
 import { AddPay, ApprovePay } from './../models/Bill';
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/';
-// const baseUrl = 'https://young-escarpment-43192.herokuapp.com/';
+// const baseUrl = 'http://localhost:3001/';
+const baseUrl = 'https://young-escarpment-43192.herokuapp.com/';
 
 export class Bills {
     static getBills = async () => {
