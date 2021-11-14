@@ -1,0 +1,40 @@
+@import '../../styles/global.scss';
+
+.creditor-container {
+    h1 {
+        margin-bottom: 0;
+    }
+    h2 {
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: .2rem;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        li {
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        li:nth-child(odd) {
+            background-color: $gray-color;
+        }
+    }
+}
+
+.creditor-container ul li div {
+    display: flex;
+    align-items: center;
+    select {
+        padding-left: 0;
+        padding-right: 0;
+        margin-right: .3rem;
+    }
+    button {
+        padding: .2rem .5rem;
+    }
+}

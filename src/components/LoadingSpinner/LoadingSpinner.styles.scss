@@ -1,0 +1,23 @@
+.load-spinner {
+	// height: 40vmin;
+	pointer-events: none;
+    // border: 1px solid red;
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.load-spinner {
+		animation: Loading-spinner infinite 1.5s linear;
+	}
+}
+
+@keyframes Loading-spinner {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

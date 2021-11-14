@@ -1,0 +1,19 @@
+@import '../../styles/global.scss';
+
+.value-bill {
+    label {
+        color: $gray-focus;
+    }
+    p {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: .6rem;
+        margin-bottom: .6rem;
+        span {
+            color: $gray-focus;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+    }
+}

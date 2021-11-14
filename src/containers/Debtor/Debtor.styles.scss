@@ -1,0 +1,52 @@
+@import '../../styles/global.scss';
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-form {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    input {
+        margin-right: .8rem;
+    }
+}
+
+.history-graph {
+    margin: 0.5rem 0;
+    background-color: $gray-color;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.history-values {
+    height: 220px;
+    overflow: auto;
+}
+
+.history-values ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        padding: .8rem 0;
+        display: flex;
+        // justify-content: space-between;
+        span:nth-child(2) {
+            font-weight: 600;
+        }
+    }
+    li:nth-child(odd) {
+        background-color: $gray-color;
+    }
+}
