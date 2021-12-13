@@ -7,12 +7,19 @@ import Toggle from 'react-toggle'
 import Creditor from './containers/Creditor/Creditor';
 import Debtor from './containers/Debtor/Debtor';
 import "react-toggle/style.css"
+import Bills from './containers/Bills/Bills';
 
 function App() {
   const [screen, setScreen] = useState(true)
+  const [billIndex, setBillIndex] = useState<null | number>(null)
 
   const handleChange = () => {
     setScreen(!screen)
+  }
+
+  const handleChangeBill = (value: number) => {
+    console.log(value)
+    setBillIndex(value)
   }
 
   return (
@@ -22,6 +29,8 @@ function App() {
           defaultChecked={screen}
           onChange={handleChange} />
       </label>
+      <Bills actionCallback={handleChangeBill} />
+      
       { screen ? <Creditor /> : <Debtor /> }
     </div>
   );

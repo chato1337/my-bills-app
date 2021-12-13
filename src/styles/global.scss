@@ -26,6 +26,22 @@ button {
     font-weight: 600;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+    }
+    li:nth-child(odd) {
+        background-color: $gray-color;
+    }
+}
+
 input, select {
     height: 100%;
     padding: .5rem 1rem;

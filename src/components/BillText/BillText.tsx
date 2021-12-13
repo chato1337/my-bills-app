@@ -1,3 +1,4 @@
+import { ParserNumber } from '../../utils';
 import './BillText.styles.scss';
 
 type BillTextProps = {
@@ -5,7 +6,7 @@ type BillTextProps = {
     money: string
 }
 const BillText = ({value, money}: BillTextProps) => {
-	const textValue = new Intl.NumberFormat("es-CO").format(value)
+	const textValue = ParserNumber.colDecimals(value)
 	return (
 		<div className="value-bill">
 			<label>Deuda a la fecha:</label>
