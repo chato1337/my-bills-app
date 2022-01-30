@@ -1,6 +1,7 @@
 import { BiSave } from 'react-icons/bi'
 import { useApproveBill } from '../../hooks/useApproveBill'
 import { HistoryPay } from '../../models/Bill'
+import { BuildTextUtil } from '../../utils'
 
 type CreditorListItemProps = {
     data: HistoryPay
@@ -9,8 +10,8 @@ type CreditorListItemProps = {
 const CreditorListItem = ({ data }: CreditorListItemProps) => {
 
     const isCompleted = data.title !== "pending" ? true : false
-    const { body, title, _id, append } = data
-    const text = `${title} - ${body}`
+    const { title, _id, append } = data
+    const text = `${title} - ${BuildTextUtil.billText(append)}`
 
     const { handleChange, handleSubmit } = useApproveBill()
 

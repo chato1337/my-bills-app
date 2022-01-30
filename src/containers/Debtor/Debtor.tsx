@@ -6,6 +6,8 @@ import BillText from "../../components/BillText/BillText";
 import "./Debtor.styles.scss";
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { BuildTextUtil } from "../../utils";
+import BillBarchart from "../../components/BillBarChart/BillBarchart";
 
 const Debtor = () => {
 	const {
@@ -62,7 +64,7 @@ const Debtor = () => {
 					</div>
 				)}
 				<div className="history-graph">
-					<span>...cargando grafico</span>
+					<BillBarchart />
 				</div>
 				<div className="history-values">
                     {
@@ -73,8 +75,8 @@ const Debtor = () => {
                             <ul>
                                 {
                                     historyData.map((item:HistoryPay) => {
-                                        const { _id, body, title } = item
-                                        const text = `${title} ${body}`
+                                        const { _id, title, append } = item
+                                        const text = `${title} ${BuildTextUtil.billText(append)}`
                                         return(
                                             <li key={_id}>{ text }</li>
                                         )

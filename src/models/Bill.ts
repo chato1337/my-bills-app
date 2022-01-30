@@ -14,8 +14,14 @@ export interface HistoryPay {
     body: string,
     footer: string,
     color: string,
-    //TODO: asigname prro!
-    append: any
+    append: PayAppend
+}
+
+export interface PayAppend {
+    concept: string,
+    date: string,
+    money: string,
+    value: number
 }
 
 export interface AddPay {
