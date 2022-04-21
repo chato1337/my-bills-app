@@ -1,4 +1,4 @@
-import { AddPay, ApprovePay } from './../models/Bill';
+import { AddPay, ApprovePay, CreateBillDTO } from './../models/Bill';
 import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/';
@@ -30,4 +30,6 @@ export class Bills {
         // const toPay = { value: payValue }
         return await axios.post(baseUrl+"add-pay", toPay)
     }
+
+    static createBill = async (newBill: CreateBillDTO) => await axios.post(`${baseUrl}add-bill`, newBill)
 }

@@ -21,7 +21,6 @@ const Debtor = () => {
 		handleSubmit,
 		isSuccess,
 		isLoading,
-		data,
 		BillFormToast,
 		concept
 	} = useBillForm();
@@ -46,7 +45,7 @@ const Debtor = () => {
 				{isLoading && <LoadingSpinner />}
 				{isSuccess && (
 					<div>
-						<BillText value={data[0].value} money={data[0].money} />
+						<BillText value={currentBillSelected.value} money={currentBillSelected.money} />
 						<div className="actions">
 							<button onClick={() => handleShowForm("pay")}>Pagar Abono</button>
 							<button onClick={() => handleShowForm("credit")}>Realizar Credito</button>

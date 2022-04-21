@@ -19,11 +19,14 @@ export const counterSlice = createSlice({
 			// which detects changes to a "draft state" and produces a brand new
 			// immutable state based off those changes
 			state.currentBill = action.payload;
-		}
+		},
+		resetBillSelected: (state) => {
+			state.currentBill = {}
+		}, 
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setCurrentBill } = counterSlice.actions;
+export const { setCurrentBill, resetBillSelected } = counterSlice.actions;
 
 export default counterSlice.reducer;

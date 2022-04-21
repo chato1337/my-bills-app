@@ -1,0 +1,31 @@
+.bill-form {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    .form-group {
+        margin: 12px 0;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 30% 70%;
+        input {
+            font-size: 16px;
+            transition: box-shadow 0.5s;
+        }
+
+        .error {
+            animation: shake 0.2s ease-in-out 0s 2;
+            box-shadow: 0 0 0.5em red;
+        }
+    }
+
+    button {
+        margin: 15px 0;
+    }
+}
+
+@keyframes shake {
+    0% { margin-left: 0rem; }
+    25% { margin-left: 0.5rem; }
+    75% { margin-left: -0.5rem; }
+    100% { margin-left: 0rem; }
+}

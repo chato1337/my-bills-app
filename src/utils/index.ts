@@ -1,3 +1,4 @@
+import { BarChartType } from "../models/BarChart"
 import { HistoryPay, PayAppend } from "../models/Bill"
 
 export class ParserNumber {
@@ -16,13 +17,13 @@ export class BuildTextUtil {
 }
 
 export class ChartDataUtil {
-    static getBarData = (data: HistoryPay[]) => {
+    static getBarData = (data: HistoryPay[]):BarChartType[] => {
 
-        const barData = data.map((data: HistoryPay) => {
-            const { concept, value } = data.append
+        const barData = data.map((dataItem: HistoryPay):BarChartType => {
+            const { concept, value } = dataItem.append
 
             return {
-                "id": data._id,
+                "id": dataItem._id,
                 "name": concept,
                 "value": value
             }

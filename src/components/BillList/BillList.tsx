@@ -3,6 +3,7 @@ import { Bill } from "../../models/Bill";
 import { setCurrentBill } from "../../redux/billSlice";
 import { ParserNumber } from "../../utils";
 import "./BillList.styles.scss";
+import { useCreateBill } from '../../hooks/useCreateBill';
 
 type BillListProps = {
 	data: Bill[],
@@ -10,9 +11,11 @@ type BillListProps = {
 
 const BillList = ({ data }: BillListProps) => {
 	const dispatch = useDispatch();
+	const { handleShowForm } = useCreateBill()
 
 	const handleBillDispatch = (bill: Bill) => {
 		dispatch(setCurrentBill(bill))
+		handleShowForm(false)
 	}
 
 	return (

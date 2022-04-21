@@ -11,6 +11,7 @@ const Bills = () => {
 
     return (
         <div>
+            <h2>Tus deudas activas:</h2>
             {
                 isLoading && <LoadingSpinner />
             }

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import { ToastContainer, toast } from 'react-toastify';
 import { Bills } from "../services/Api"
+import { useBill } from './useBill';
 
 export const useBillForm = () => {
     const queryClient = useQueryClient()
@@ -11,6 +12,7 @@ export const useBillForm = () => {
     const [inputValue, setInputValue] = useState<number | string>("")
     const [showInput, setShowInput] = useState(false)
     const [isReadOnly, setIsReadOnly] = useState(false)
+    const { currentBillSelected } = useBill()
 
     const notify = (msj: string) => toast(msj, { autoClose: 5000 })
 
@@ -28,9 +30,9 @@ export const useBillForm = () => {
 
     useEffect(() => {
         if(isSuccess){
-            setBill(data[0].value)
+            setBill(currentBillSelected.value)
         }
-    }, [data, isSuccess])
+    }, [isSuccess, currentBillSelected.value])
 
     const handleShowForm = (action:string) => {
         if(action === 'payAll') {
@@ -49,7 +51,7 @@ export const useBillForm = () => {
         setShowInput(!showInput)
     }
 
-    const handleInput = (e: any) => {
+    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
     }
 
@@ -61,7 +63,7 @@ export const useBillForm = () => {
 
     const handleSubmit = (typeConcept: string) => {
         if(inputValue && inputValue <= 0) return alert('el valor no puede ser 0')
-        const toPay:AddPay = { id: data[0]._id, value: inputValue as number, concept: typeConcept }
+        const toPay:AddPay = { id: currentBillSelected._id, value: inputValue as number, concept: typeConcept }
         mutate(toPay)
         handleCancel()
     }
