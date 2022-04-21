@@ -1,8 +1,8 @@
 import { AddPay, ApprovePay } from './../models/Bill';
 import axios from 'axios'
 
-// const baseUrl = 'http://localhost:3001/';
-const baseUrl = 'https://young-escarpment-43192.herokuapp.com/';
+const baseUrl = 'http://localhost:3001/';
+// const baseUrl = 'https://young-escarpment-43192.herokuapp.com/';
 
 export class Bills {
     static getBills = async () => {
@@ -10,9 +10,16 @@ export class Bills {
         return res.data
     }
 
-    static getHistory = async () => {
-        const res = await axios.get(baseUrl+"bill-history")
-        return res.data
+    static getHistory = async (query: any) => {
+        const { queryKey } = query
+        const billId = queryKey[1] === '' ? 'key-error' : queryKey[1]
+
+        if (billId === 'key-error') {
+            return []
+        }else {
+            const res = await axios.get(`${baseUrl}bill-history?id=${billId}`)
+            return res.data
+        }
     }
 
     static approvePay = async (toApprove: ApprovePay) => {

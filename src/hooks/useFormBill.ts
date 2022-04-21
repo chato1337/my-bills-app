@@ -30,7 +30,7 @@ export const useBillForm = () => {
         if(isSuccess){
             setBill(data[0].value)
         }
-    }, [data])
+    }, [data, isSuccess])
 
     const handleShowForm = (action:string) => {
         if(action === 'payAll') {

@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { BuildTextUtil } from "../../utils";
 import BillBarchart from "../../components/BillBarChart/BillBarchart";
+import { useBill } from '../../hooks/useBill';
 
 const Debtor = () => {
 	const {
@@ -25,11 +26,13 @@ const Debtor = () => {
 		concept
 	} = useBillForm();
 
+	const { currentBillSelected } = useBill()
+
 	const {
 		data: historyData,
 		isLoading: isLoadingHistory,
 		isSuccess: isSuccessHistory,
-	} = useHistoryBill();
+	} = useHistoryBill(currentBillSelected._id);
 
 	return (
 		<div>

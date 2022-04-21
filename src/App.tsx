@@ -4,22 +4,18 @@ import './App.scss';
 import { useState } from 'react';
 //@ts-ignore TODO: assign types
 import Toggle from 'react-toggle'
-import Creditor from './containers/Creditor/Creditor';
-import Debtor from './containers/Debtor/Debtor';
 import "react-toggle/style.css"
 import Bills from './containers/Bills/Bills';
+import { useBill } from './hooks/useBill';
+import DetailNavigation from './containers/DetailNavigation/DetailNavigation';
 
 function App() {
   const [screen, setScreen] = useState(true)
-  const [billIndex, setBillIndex] = useState<null | number>(null)
+  //get redux state Bill
+  const { isBillSelected } = useBill()
 
   const handleChange = () => {
     setScreen(!screen)
-  }
-
-  const handleChangeBill = (value: number) => {
-    console.log(value)
-    setBillIndex(value)
   }
 
   return (
@@ -27,11 +23,15 @@ function App() {
       <label>
         <Toggle
           defaultChecked={screen}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
       </label>
-      <Bills actionCallback={handleChangeBill} />
-      
-      { screen ? <Creditor /> : <Debtor /> }
+      {
+        !isBillSelected && <Bills />
+      }
+      {
+        isBillSelected && <DetailNavigation screen={screen} />
+      }
     </div>
   );
 }

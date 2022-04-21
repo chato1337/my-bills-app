@@ -1,23 +1,23 @@
 import { useHistoryBill } from '../../hooks/useHistoryBill'
 import CreditorListItem from '../../components/CreditorListItem/CreditorListItem';
 import { HistoryPay } from '../../models/Bill';
-import { useBillForm } from '../../hooks/useFormBill';
 import BillText from '../../components/BillText/BillText';
 import './Creditor.styles.scss'
 import { useApproveBill } from '../../hooks/useApproveBill';
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import { useBill } from '../../hooks/useBill';
 
 const Creditor = () => {
-    const { data, isLoading, isSuccess } = useHistoryBill()
-    const { data: dataBill, isSuccess: isSuccessBill } = useBillForm()
     const { ApprovePayToast } = useApproveBill()
+    const { currentBillSelected } = useBill()
+    const { data, isLoading, isSuccess } = useHistoryBill(currentBillSelected._id)
 
     return (
         <div className="creditor-container">
             <h1>creditor screen</h1>
-            <h2>{ isSuccessBill && dataBill[0].owner }</h2>
-            { isSuccessBill && <BillText value={dataBill[0].value} money={dataBill[0].money} />}
+            <h2>{ currentBillSelected.owner }</h2>
+            <BillText value={ currentBillSelected.value } money={ currentBillSelected.money } />
             <ul>
                 { isLoading &&  <LoadingSpinner />}
                 { isSuccess && (
