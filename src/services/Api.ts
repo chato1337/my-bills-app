@@ -1,8 +1,7 @@
 import { AddPay, ApprovePay, CreateBillDTO } from './../models/Bill';
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/';
-// const baseUrl = 'https://young-escarpment-43192.herokuapp.com/';
+const baseUrl = process.env.REACT_APP_API_URL
 
 export class Bills {
     static getBills = async () => {
