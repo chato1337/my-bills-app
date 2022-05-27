@@ -1,18 +1,21 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from '../containers/Login/Login';
 import ProtectedRoute from '../containers/ProtectedRoute/ProtectedRoute';
-import Debtor from '../containers/Debtor/Debtor';
 import NotFound from '../components/NotFound/NotFound';
 import Bills from '../containers/Bills/Bills';
+import Navbar from '../components/Navbar/Navbar';
+import Creditor from '../containers/Creditor/Creditor';
+import Debtor from '../containers/Debtor/Debtor';
 
 const MainRoutes = () => {
   return (
     <BrowserRouter>
+        <Navbar />
         <Routes>
             <Route index element={ <Login /> } />
             <Route path="login" element={ <Login /> } />
             <Route
-                path="creditor"
+                path="debtor"
                 element={
                     <ProtectedRoute>
                         <Bills />
@@ -20,12 +23,16 @@ const MainRoutes = () => {
                 }
             />
             <Route
-                path="debtor"
+                path="creditor"
                 element={
                     <ProtectedRoute>
-                        <Debtor />
+                        <Creditor />
                     </ProtectedRoute>
                 }
+            />
+            <Route
+                path='detail'
+                element={ <Debtor /> }
             />
             <Route path="*" element={ <NotFound /> } />
         </Routes>

@@ -24,7 +24,7 @@ const Login = () => {
   useEffect(() => {
     console.log(user)
     if (user) {
-      navigate(`/${user.role}`, { replace: true })
+      navigate(`/debtor`, { replace: true })
     }
   }, [user, navigate])
 

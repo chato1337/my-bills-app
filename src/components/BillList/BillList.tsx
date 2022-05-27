@@ -4,6 +4,7 @@ import { setCurrentBill } from "../../redux/billSlice";
 import { ParserNumber } from "../../utils";
 import "./BillList.styles.scss";
 import { useCreateBill } from '../../hooks/useCreateBill';
+import { useNavigate } from 'react-router-dom';
 
 type BillListProps = {
 	data: Bill[],
@@ -12,9 +13,11 @@ type BillListProps = {
 const BillList = ({ data }: BillListProps) => {
 	const dispatch = useDispatch();
 	const { handleShowForm } = useCreateBill()
+	const navigate = useNavigate()
 
 	const handleBillDispatch = (bill: Bill) => {
 		dispatch(setCurrentBill(bill))
+		navigate('/detail', { replace: true })
 		handleShowForm(false)
 	}
 
