@@ -1,23 +1,8 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { CreateBillDTO } from "../../models/Bill";
 import "./BillForm.styles.scss";
 import { useCreateBill } from '../../hooks/useCreateBill';
-// import currencyCodes from "../../utils/currencyCodes.json"
 
 const BillForm = () => {
-    const { handleCreateBill } = useCreateBill()
-	const {
-		register,
-		handleSubmit,
-		// watch,
-		formState: { errors },
-	} = useForm<CreateBillDTO>();
-	const onSubmit: SubmitHandler<CreateBillDTO> = (data) => {
-        console.log(data)
-        handleCreateBill(data)
-    };
-
-    //console.log(watch("example")); // watch input value by passing the name of it
+    const { handleSubmit, onSubmit, errors, register } = useCreateBill()
 
 	return (
 		/* "handleSubmit" will validate your inputs before invoking "onSubmit" */

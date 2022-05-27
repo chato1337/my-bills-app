@@ -3,24 +3,44 @@ import { Bills } from '../services/Api';
 import { useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { CreateBillDTO } from '../models/Bill';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../app/store';
+import { setShowForm } from '../redux/settingsSlice';
+import { useForm, SubmitHandler } from "react-hook-form";
 
 export const useCreateBill = () => {
     const queryClient = useQueryClient()
-    const [showForm, setShowForm] = useState(false)
+    const dispatch = useDispatch()
+    const showForm = useSelector((state: RootState) => state.settings.showForm)
 
     const notify = (msj: string) => toast(msj, { autoClose: 5000 })
+
+    const {
+		register,
+		handleSubmit,
+		// watch,
+        reset,
+		formState: { errors },
+	} = useForm<CreateBillDTO>();
+
+	const onSubmit: SubmitHandler<CreateBillDTO> = (data) => {
+        console.log(data)
+        handleCreateBill(data)
+    };
+
+    //console.log(watch("example")); // watch input value by passing the name of it
 
     const { mutate } = useMutation(Bills.createBill, {
         onSuccess: (data, variables, context) => {
             console.log(variables)
             queryClient.refetchQueries()
+            reset()
             notify('created!!')
         }
     })
 
     const handleShowForm = (show: boolean) => {
-        setShowForm(show)
+        dispatch(setShowForm(show))
     }
 
     const handleCreateBill = (newBill: CreateBillDTO) => {
@@ -28,8 +48,11 @@ export const useCreateBill = () => {
     }
 
     return {
-        handleCreateBill,
         handleShowForm,
         showForm,
+        onSubmit,
+        register,
+        handleSubmit,
+        errors
     }
 }

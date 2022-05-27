@@ -4,7 +4,6 @@ import { useHistoryBill } from "../../hooks/useHistoryBill";
 import { HistoryPay } from "../../models/Bill";
 import BillText from "../../components/BillText/BillText";
 import "./Debtor.styles.scss";
-import 'react-toastify/dist/ReactToastify.css';
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { BuildTextUtil } from "../../utils";
 import BillBarchart from "../../components/BillBarChart/BillBarchart";
@@ -21,7 +20,6 @@ const Debtor = () => {
 		handleSubmit,
 		isSuccess,
 		isLoading,
-		BillFormToast,
 		concept
 	} = useBillForm();
 
@@ -89,7 +87,6 @@ const Debtor = () => {
                     }
 				</div>
 			</main>
-			<BillFormToast />
 		</div>
 	);
 };
