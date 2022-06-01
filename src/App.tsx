@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import MainRoutes from './routes/MainRoutes';
 
 function App() {
-  //TODO: export to redux state, set auto percentage, generate select currency
+  //TODO: set auto percentage, generate select currency
   //get redux state Bill
   const { showForm } = useCreateBill()
   const { BillFormToast } = useBillForm()

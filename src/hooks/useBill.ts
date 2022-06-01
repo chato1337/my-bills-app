@@ -1,36 +1,27 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useQuery } from 'react-query';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../app/store';
-import { Bill } from '../models/Bill';
+import { setCurrentBill } from '../redux/billSlice';
+import { Bills } from '../services/Api';
 import { BillService } from '../services/Bill.service';
 
-const initialBill: Bill = {
-    date: "",
-    extra: "",
-    money: "",
-    owner: "",
-    status: "",
-    value: 0,
-    _id: ""
-}
-
 export const useBill = () => {
-    const [ isSelected, setIsSelected ] = useState(false)
-    const [ currentBill, setCurrentBill ] = useState<Bill>(initialBill)
-    const billStore = useSelector((state: RootState) => state.bill.currentBill)
+    const currentBill = useSelector((state: RootState) => state.bill.currentBill)
+    const { data, isSuccess, isLoading } = useQuery('bills', Bills.getBills)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        if (BillService.isBillSelected(billStore)) {
-            setIsSelected(true)
-            //TODO: FIX THIS SHIT
-            setCurrentBill(billStore as Bill)
-        } else {
-            setIsSelected(false)
+        if (BillService.getBill()) {
+            dispatch(setCurrentBill(BillService.getBill()))
         }
-    }, [billStore])
+    }, [currentBill, dispatch])
 
     return {
-        isBillSelected: isSelected,
-        currentBillSelected: currentBill
+        currentBillSelected: currentBill,
+        bills: data,
+        isLoading,
+        isSuccess
     }
 }

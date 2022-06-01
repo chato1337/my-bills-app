@@ -11,8 +11,8 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 
 const BillBarchart = () => {
-    const { currentBillSelected, isBillSelected } = useBill()
-    const { data: historyData, isSuccess } = useHistoryBill(currentBillSelected._id)
+    const { currentBillSelected } = useBill()
+    const { data: historyData, isSuccess } = useHistoryBill()
     const [ chartData, setChartData ] = useState<BarChartType[] | null>(null)
     const [ maxValue, setMaxValue ] = useState(0)
     const { width: widthScreen } = useWindowDimensions()
@@ -21,7 +21,7 @@ const BillBarchart = () => {
     // const maxValue = ChartDataUtil.getMaxDataValue(historyData, addValue)
 
     useEffect(() => {
-        if (isSuccess && isBillSelected) {
+        if (isSuccess) {
             // TODO: exist a better way to do that?
             setChartData(ChartDataUtil.getBarData(historyData as HistoryPay[]))
             setMaxValue(ChartDataUtil.getMaxDataValue(historyData as HistoryPay[], addValue))
@@ -29,7 +29,7 @@ const BillBarchart = () => {
             setChartData(null)
             setMaxValue(0)
         }
-    }, [isSuccess, currentBillSelected, isBillSelected, historyData])
+    }, [isSuccess, currentBillSelected, historyData])
 
     return (
         <div className="barchart-container">

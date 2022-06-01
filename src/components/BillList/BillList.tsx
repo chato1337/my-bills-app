@@ -5,15 +5,14 @@ import { ParserNumber } from "../../utils";
 import "./BillList.styles.scss";
 import { useCreateBill } from '../../hooks/useCreateBill';
 import { useNavigate } from 'react-router-dom';
+import { useBill } from '../../hooks/useBill';
 
-type BillListProps = {
-	data: Bill[],
-};
 
-const BillList = ({ data }: BillListProps) => {
+const BillList = () => {
 	const dispatch = useDispatch();
 	const { handleShowForm } = useCreateBill()
 	const navigate = useNavigate()
+	const { bills } = useBill()
 
 	const handleBillDispatch = (bill: Bill) => {
 		dispatch(setCurrentBill(bill))
@@ -23,12 +22,12 @@ const BillList = ({ data }: BillListProps) => {
 
 	return (
 		<ul>
-			{data.map((el: Bill) => {
+			{bills.map((el: Bill) => {
 				const priceValue = ParserNumber.colDecimals(el.value);
 				return (
 					<li key={el._id}>
 						{el.date} - {el.owner} - {priceValue} {el.money}
-                        <button onClick={ () => handleBillDispatch(el) } >detalles</button>
+                        <button onClick={ () => handleBillDispatch(el) }>detalles</button>
 					</li>
 				);
 			})}

@@ -1,6 +1,11 @@
 import { Bill } from '../models/Bill';
 
 export class BillService {
-    static isBillSelected = (billStore: Bill | {}): boolean =>
-        Object.keys(billStore).length > 0 ? true : false
+    static store = (bill: Bill) => localStorage.setItem('currentBill', JSON.stringify(bill))
+
+    static getBill = (): Bill => {
+        const storedBill = localStorage.getItem('currentBill')
+
+        return storedBill ? JSON.parse(storedBill) : null
+    }
 }

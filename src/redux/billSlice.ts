@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Bill } from '../models/Bill';
 
 export interface BillState {
-	currentBill: Bill | {};
+	currentBill: Bill | null;
 }
 
 const initialState: BillState = {
-	currentBill: {},
+	currentBill: null,
 };
 
 export const counterSlice = createSlice({
@@ -21,7 +21,7 @@ export const counterSlice = createSlice({
 			state.currentBill = action.payload;
 		},
 		resetBillSelected: (state) => {
-			state.currentBill = {}
+			state.currentBill = null
 		}, 
 	},
 });

@@ -1,19 +1,20 @@
 import { ParserNumber } from '../../utils';
+import { useBill } from '../../hooks/useBill';
 import './BillText.styles.scss';
 
-type BillTextProps = {
-    value: number,
-    money: string
-}
-const BillText = ({value, money}: BillTextProps) => {
-	const textValue = ParserNumber.colDecimals(value)
+
+const BillText = () => {
+	const { currentBillSelected } = useBill()
+	const textValue = currentBillSelected ? ParserNumber.colDecimals(currentBillSelected.value) : 0
+
 	return (
 		<div className="value-bill">
 			<label>Deuda a la fecha:</label>
 			<p>
 				{textValue}
-				<span> {money}</span>
+				<span>{ currentBillSelected?.money }</span>
 			</p>
+			<label>{ currentBillSelected?.owner }</label>
 		</div>
 	);
 };

@@ -1,13 +1,13 @@
 import BillList from '../../components/BillList/BillList';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import { useBillForm } from '../../hooks/useFormBill';
+import { useBill } from '../../hooks/useBill';
 
 // type BillsProps = {
 //     actionCallback: (value:number) => void
 // }
 
 const Bills = () => {
-    const { data, isLoading, isSuccess } = useBillForm()
+    const { isLoading, isSuccess } = useBill()
 
     return (
         <div>
@@ -16,7 +16,7 @@ const Bills = () => {
                 isLoading && <LoadingSpinner />
             }
             {
-                isSuccess && <BillList data={data} />
+                isSuccess && <BillList />
             }
         </div>
     )

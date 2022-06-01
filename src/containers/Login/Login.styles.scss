@@ -1,0 +1,30 @@
+.login-container {
+    h2 {
+        text-align: center;
+    }
+
+    .error-msg {
+        display: block;
+        text-align: center;
+        padding: 5px 8px;
+        border: 1px solid red;
+        background-color: rgb(225, 181, 181);
+    }
+
+    .login-form {
+        margin: 5px 8px;
+        .form-group {
+            display: grid;
+            grid-template-columns: 25% 75%;
+            align-items: center;
+            margin: 35px 0;       
+        }
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        font-size: 14px;
+    }
+}

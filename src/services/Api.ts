@@ -1,5 +1,6 @@
 import { AddPay, ApprovePay, CreateBillDTO } from './../models/Bill';
 import axios from 'axios'
+import { User, GetUserResponse } from '../models/User';
 
 const baseUrl = process.env.REACT_APP_API_URL
 
@@ -11,9 +12,9 @@ export class Bills {
 
     static getHistory = async (query: any) => {
         const { queryKey } = query
-        const billId = queryKey[1] === '' ? 'key-error' : queryKey[1]
+        const billId = queryKey[1]
 
-        if (billId === 'key-error') {
+        if (!billId) {
             return []
         }else {
             const res = await axios.get(`${baseUrl}bill-history?id=${billId}`)
@@ -31,4 +32,14 @@ export class Bills {
     }
 
     static createBill = async (newBill: CreateBillDTO) => await axios.post(`${baseUrl}add-bill`, newBill)
+}
+
+export class Auth {
+    static login = async (query: any) => {
+        return query
+            ? await axios.post<GetUserResponse>(baseUrl+"login", query)
+            : console.log(query)
+    }
+
+    static createAccount = (newUser: User) => axios.post(baseUrl+'signup', newUser) 
 }

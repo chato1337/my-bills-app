@@ -1,36 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { RootState } from '../../app/store';
-import { User } from '../../models/User';
-import { useEffect } from 'react';
-import { setUser } from '../../redux/authSlice';
-
-const mockUser: User = {
-  username: 'didier test',
-  email: 'me@me.com',
-  role: 'creditor',
-  country: 'col'
-}
+import { useAuth } from '../../hooks/useAuth';
+import './Login.styles.scss'
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const user = useSelector((state: RootState) => state.auth.user)
-
-  const handleClick = () => {
-    dispatch(setUser(mockUser))
-  }
-
-  useEffect(() => {
-    console.log(user)
-    if (user) {
-      navigate(`/debtor`, { replace: true })
-    }
-  }, [user, navigate])
+  const { handleSubmit, onSubmit, errors, register, errorForm } = useAuth()
 
   return (
-    <div>
-      <button onClick={handleClick}>Login</button>
+    <div className='login-container' >
+      <h2>Welcome:</h2>
+      { errorForm && <label className='error-msg'>Invalid username or password</label> }
+      <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-group">
+          <label htmlFor="email">Username</label>
+          <input className={errors.username && 'error'} type="text" id='username' {...register("username", { required: true })} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input className={errors.password && 'error'} type="text" id='password' {...register("password", { required: true })} />
+        </div>
+        <button>Login</button>
+      </form>
     </div>
   )
 }

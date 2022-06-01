@@ -11,13 +11,13 @@ import { useBill } from '../../hooks/useBill';
 const Creditor = () => {
     const { ApprovePayToast } = useApproveBill()
     const { currentBillSelected } = useBill()
-    const { data, isLoading, isSuccess } = useHistoryBill(currentBillSelected._id)
+    const { data, isLoading, isSuccess } = useHistoryBill()
 
     return (
         <div className="creditor-container">
             <h1>creditor screen</h1>
-            <h2>{ currentBillSelected.owner }</h2>
-            <BillText value={ currentBillSelected.value } money={ currentBillSelected.money } />
+            <h2>{ currentBillSelected?.owner }</h2>
+            <BillText />
             <ul>
                 { isLoading &&  <LoadingSpinner />}
                 { isSuccess && (

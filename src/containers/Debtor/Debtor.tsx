@@ -1,4 +1,3 @@
-import { BiUserCircle } from "react-icons/bi";
 import { useBillForm } from "../../hooks/useFormBill";
 import { useHistoryBill } from "../../hooks/useHistoryBill";
 import { HistoryPay } from "../../models/Bill";
@@ -18,32 +17,24 @@ const Debtor = () => {
 		handleInput,
 		handleCancel,
 		handleSubmit,
-		isSuccess,
-		isLoading,
 		concept
 	} = useBillForm();
 
-	const { currentBillSelected } = useBill()
+	const { isLoading, isSuccess } = useBill()
 
 	const {
 		data: historyData,
 		isLoading: isLoadingHistory,
 		isSuccess: isSuccessHistory,
-	} = useHistoryBill(currentBillSelected._id);
+	} = useHistoryBill();
 
 	return (
 		<div>
-			<header>
-				<h1>Mis deudas app</h1>
-				<div className="profile">
-					<BiUserCircle size={48} />
-				</div>
-			</header>
 			<main>
 				{isLoading && <LoadingSpinner />}
 				{isSuccess && (
 					<div>
-						<BillText value={currentBillSelected.value} money={currentBillSelected.money} />
+						<BillText />
 						<div className="actions">
 							<button onClick={() => handleShowForm("pay")}>Pagar Abono</button>
 							<button onClick={() => handleShowForm("credit")}>Realizar Credito</button>
