@@ -52,8 +52,14 @@ export class Auth {
 }
 
 export class UserProfile {
-    static getProfile = async () => {
-        const res = await axios.get(baseUrl+'profile')
-        return res.data
+    static getProfile = async (query: any) => {
+        const { queryKey } = query
+        const userId = queryKey[1]
+        if (userId) {
+            const res = await axios.get(baseUrl+`profile?id=${userId}`)
+            return res.data
+        }else {
+            return []
+        }
     }
 }

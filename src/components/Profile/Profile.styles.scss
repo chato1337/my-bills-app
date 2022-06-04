@@ -5,3 +5,12 @@ header {
     align-items: center;
     justify-content: space-between;
 }
+
+.profile {
+    img {
+        display: block;
+        height: 65px;
+        width: auto;
+        border-radius: 35px;
+    }
+}

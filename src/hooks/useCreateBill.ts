@@ -25,7 +25,7 @@ export const useCreateBill = () => {
 	} = useForm<CreateBillDTO>();
 
 	const onSubmit: SubmitHandler<CreateBillDTO> = (data) => {
-        const id = user?._id ?? 'none'
+        const id = user?._id ?? ''
         const billDTO = { ...data, user_id: id }
         handleCreateBill(billDTO)
     };
