@@ -5,9 +5,16 @@ import { User, GetUserResponse } from '../models/User';
 const baseUrl = process.env.REACT_APP_API_URL
 
 export class Bills {
-    static getBills = async () => {
-        const res = await axios.get(baseUrl+"bills")
-        return res.data
+    static getBills = async (query: any) => {
+        const { queryKey } = query
+        const id = queryKey[1]
+
+        if (id) {
+            const res = await axios.get(baseUrl+`bills?id=${id}`)
+            return res.data
+        }else {
+            return []
+        }
     }
 
     static getHistory = async (query: any) => {
@@ -42,4 +49,11 @@ export class Auth {
     }
 
     static createAccount = (newUser: User) => axios.post(baseUrl+'signup', newUser) 
+}
+
+export class UserProfile {
+    static getProfile = async () => {
+        const res = await axios.get(baseUrl+'profile')
+        return res.data
+    }
 }

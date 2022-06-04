@@ -12,6 +12,7 @@ export const useCreateBill = () => {
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
     const showForm = useSelector((state: RootState) => state.settings.showForm)
+    const user = useSelector((state: RootState) => state.auth.user)
 
     const notify = (msj: string) => toast(msj, { autoClose: 5000 })
 
@@ -24,8 +25,9 @@ export const useCreateBill = () => {
 	} = useForm<CreateBillDTO>();
 
 	const onSubmit: SubmitHandler<CreateBillDTO> = (data) => {
-        console.log(data)
-        handleCreateBill(data)
+        const id = user?._id ?? 'none'
+        const billDTO = { ...data, user_id: id }
+        handleCreateBill(billDTO)
     };
 
     //console.log(watch("example")); // watch input value by passing the name of it

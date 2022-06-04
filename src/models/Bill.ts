@@ -1,9 +1,11 @@
 export interface Bill {
-    _id: string;
+    _id: string,
+    user_id: string,
     value: number,
     date: string,
     money: string,
-    owner: string,
+    owner_id: string,
+    concept: string,
     extra: string,
     status: string
 }

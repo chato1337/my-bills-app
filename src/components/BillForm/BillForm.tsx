@@ -34,7 +34,11 @@ const BillForm = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="inputOwner">Owner:</label>
-                    <input className={errors.owner && 'error'} id="inputOwner" {...register("owner", { required: true })} />
+                    <input className={errors.owner_id && 'error'} id="inputOwner" {...register("owner_id", { required: true })} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="inputConcept">Concept:</label>
+                    <input className={errors.concept && 'error'} id="inputConcept" {...register("concept", { required: true })} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="inputExta">Extra percentage:</label>

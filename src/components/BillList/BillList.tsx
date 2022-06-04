@@ -26,7 +26,7 @@ const BillList = () => {
 				const priceValue = ParserNumber.colDecimals(el.value);
 				return (
 					<li key={el._id}>
-						{el.date} - {el.owner} - {priceValue} {el.money}
+						{el.date} - {el.concept} - {priceValue} {el.money}
                         <button onClick={ () => handleBillDispatch(el) }>detalles</button>
 					</li>
 				);

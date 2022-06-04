@@ -16,7 +16,7 @@ const Creditor = () => {
     return (
         <div className="creditor-container">
             <h1>creditor screen</h1>
-            <h2>{ currentBillSelected?.owner }</h2>
+            <h2>{ currentBillSelected?.concept }</h2>
             <BillText />
             <ul>
                 { isLoading &&  <LoadingSpinner />}

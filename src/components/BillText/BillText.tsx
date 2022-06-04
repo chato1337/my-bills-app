@@ -14,7 +14,7 @@ const BillText = () => {
 				{textValue}
 				<span>{ currentBillSelected?.money }</span>
 			</p>
-			<label>{ currentBillSelected?.owner }</label>
+			<label>{ currentBillSelected?.concept }</label>
 		</div>
 	);
 };

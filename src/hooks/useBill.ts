@@ -7,8 +7,9 @@ import { Bills } from '../services/Api';
 import { BillService } from '../services/Bill.service';
 
 export const useBill = () => {
+    const user = useSelector((state: RootState) => state.auth.user)
     const currentBill = useSelector((state: RootState) => state.bill.currentBill)
-    const { data, isSuccess, isLoading } = useQuery('bills', Bills.getBills)
+    const { data, isSuccess, isLoading } = useQuery(['bills', user?._id], Bills.getBills)
 
     const dispatch = useDispatch()
 
