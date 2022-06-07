@@ -8,6 +8,7 @@ import { RootState } from '../app/store';
 import { setShowForm } from '../redux/settingsSlice';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useOwnerSelect } from './userOwnerSelect';
+import { useSelect } from './useSelect';
 
 export const useCreateBill = () => {
     const queryClient = useQueryClient()
@@ -15,6 +16,7 @@ export const useCreateBill = () => {
     const showForm = useSelector((state: RootState) => state.settings.showForm)
     const user = useSelector((state: RootState) => state.auth.user)
     const { userOptions, handleChangeUser, selectedUser } = useOwnerSelect()
+    const { handleChange: handleChangeCode, selectedOption: selectedOptionCode } = useSelect({ value: 'COP', label: 'COP' })
 
     const notify = (msj: string) => toast(msj, { autoClose: 5000 })
 
@@ -60,6 +62,8 @@ export const useCreateBill = () => {
         errors,
         userOptions,
         handleChangeUser,
-        selectedUser
+        selectedUser,
+        handleChangeCode,
+        selectedOptionCode
     }
 }

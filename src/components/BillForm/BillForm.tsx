@@ -2,6 +2,7 @@ import "./BillForm.styles.scss";
 import { useCreateBill } from "../../hooks/useCreateBill";
 import Select from "react-select";
 import { Option } from "../../hooks/useSelect";
+import { SelectParser } from "../../utils";
 
 const BillForm = () => {
 	const {
@@ -12,7 +13,11 @@ const BillForm = () => {
 		userOptions,
 		handleChangeUser,
 		selectedUser,
+        handleChangeCode,
+        selectedOptionCode
 	} = useCreateBill();
+
+    SelectParser.genCurrencyOptions()
 
 	return (
 		/* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -40,12 +45,13 @@ const BillForm = () => {
 				</div>
 				<div className="form-group">
 					<label htmlFor="inpuMoney">Money type:</label>
-					<input
-						className={errors.money && "error"}
-						id="inpuMoney"
-						type="text"
-						{...register("money", { required: true })}
-					/>
+                    <Select
+                        defaultValue={selectedOptionCode}
+                        onChange={handleChangeCode}
+                        //TODO: fix this casting
+                        options={SelectParser.genCurrencyOptions() as Option[]}
+                    />
+
 					{/* <select className={errors.money && 'error'} { ...register("money", { required: true }) }>
                         {
                             Object.values(currencyCodes).map((el) => {

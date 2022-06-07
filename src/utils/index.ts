@@ -1,6 +1,7 @@
 import { BarChartType } from "../models/BarChart"
 import { HistoryPay, PayAppend } from "../models/Bill"
 import { User } from '../models/User';
+import codes from './currencyCodes.json'
 
 export class ParserNumber {
     static colDecimals = (value: number) => {
@@ -48,6 +49,10 @@ export class SelectParser {
             return null
         }
     }
+
+    static genCurrencyOptions = () =>
+        Object.values(codes).map((obj) =>
+            ({ value: obj.code, label: obj.code }))
 }
 
 export class ChartDataUtil {
