@@ -18,7 +18,6 @@ export const useAuth = () => {
 	const { mutate } = useMutation(Auth.login, {
 		onSuccess: (variables) => {
 			setErrorForm(false)
-			console.log(variables)
 			handleLogin(variables)
 		},
 		onError: () => {

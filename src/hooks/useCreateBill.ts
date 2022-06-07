@@ -9,6 +9,13 @@ import { setShowForm } from '../redux/settingsSlice';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useOwnerSelect } from './userOwnerSelect';
 import { useSelect } from './useSelect';
+import { SelectParser } from '../utils';
+import { useEffect } from 'react';
+
+const initialCurrency = {
+    value: 'COP',
+    label: 'COP'
+}
 
 export const useCreateBill = () => {
     const queryClient = useQueryClient()
@@ -16,7 +23,7 @@ export const useCreateBill = () => {
     const showForm = useSelector((state: RootState) => state.settings.showForm)
     const user = useSelector((state: RootState) => state.auth.user)
     const { userOptions, handleChangeUser, selectedUser } = useOwnerSelect()
-    const { handleChange: handleChangeCode, selectedOption: selectedOptionCode } = useSelect({ value: 'COP', label: 'COP' })
+    const { handleChange: handleChangeCode, selectedOption: selectedOptionCode } = useSelect(initialCurrency)
 
     const notify = (msj: string) => toast(msj, { autoClose: 5000 })
 
@@ -28,9 +35,34 @@ export const useCreateBill = () => {
 		formState: { errors },
 	} = useForm<CreateBillDTO>();
 
+    const resetFormfields = (show: boolean = false) => {
+        handleChangeCode(initialCurrency)
+        handleChangeUser(null)
+        reset()
+        dispatch(setShowForm(show))
+    }
+
+    //close form and reset input fields
+    //TODO: improve using useCallback
+    useEffect(() => {
+        if (!user) {
+            handleChangeCode(initialCurrency)
+            handleChangeUser(null)
+            reset()
+            dispatch(setShowForm(false))    
+        }
+    }, [user, dispatch, handleChangeCode, handleChangeUser, reset])
+
 	const onSubmit: SubmitHandler<CreateBillDTO> = (data) => {
+        const selUser = SelectParser.getOptionSelected(selectedUser, 'no-user')
+        const selMoney = SelectParser.getOptionSelected(selectedOptionCode, 'no-currency')
         const id = user?._id ?? ''
-        const billDTO = { ...data, user_id: id, owner: selectedUser }
+        const billDTO = { 
+            ...data,
+            user_id: id,
+            owner_id: selUser,
+            money: selMoney
+        }
         handleCreateBill(billDTO)
     };
 
@@ -40,7 +72,8 @@ export const useCreateBill = () => {
         onSuccess: (data, variables, context) => {
             console.log(variables)
             queryClient.refetchQueries()
-            reset()
+            //reset fields
+            resetFormfields()
             notify('created!!')
         }
     })

@@ -2,7 +2,7 @@ import { BarChartType } from "../models/BarChart"
 import { HistoryPay, PayAppend } from "../models/Bill"
 import { User } from '../models/User';
 import codes from './currencyCodes.json'
-
+import { Option } from '../hooks/useSelect'
 export class ParserNumber {
     static colDecimals = (value: number) => {
         return new Intl.NumberFormat("es-CO").format(value)
@@ -53,6 +53,18 @@ export class SelectParser {
     static genCurrencyOptions = () =>
         Object.values(codes).map((obj) =>
             ({ value: obj.code, label: obj.code }))
+    
+    static getOptionSelected = (selected:Option | Option[] | null, defaultSel: string):string => {
+        if (typeof selected === 'object' && selected !== null) {
+            const parseToObj = selected as Option 
+            return parseToObj.value
+        }else if(Array.isArray(selected)) {
+            const parseToArr = selected as Option[]
+            return parseToArr.length > 0 ? 'array method here' : defaultSel
+        }else {
+            return defaultSel
+        }
+    }
 }
 
 export class ChartDataUtil {

@@ -17,8 +17,6 @@ const BillForm = () => {
         selectedOptionCode
 	} = useCreateBill();
 
-    SelectParser.genCurrencyOptions()
-
 	return (
 		/* "handleSubmit" will validate your inputs before invoking "onSubmit" */
 		<div className="form-container">
@@ -31,6 +29,9 @@ const BillForm = () => {
 						className={errors.value && "error"}
 						type="number"
 						id="inpuValue"
+						min="0"
+						prefix="$"
+						step="10"
 						{...register("value", { required: true })}
 					/>
 				</div>
@@ -51,17 +52,6 @@ const BillForm = () => {
                         //TODO: fix this casting
                         options={SelectParser.genCurrencyOptions() as Option[]}
                     />
-
-					{/* <select className={errors.money && 'error'} { ...register("money", { required: true }) }>
-                        {
-                            Object.values(currencyCodes).map((el) => {
-                                console.log(el)
-                                return (
-                                    <option value={el.code}>{el.code}</option>
-                                )
-                            })
-                        }
-                    </select> */}
 				</div>
 				<div className="form-group">
 					<label htmlFor="inputOwner">Owner:</label>

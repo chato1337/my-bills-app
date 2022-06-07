@@ -11,6 +11,7 @@ export interface Bill {
 }
 
 export interface CreateBillDTO extends Omit<Bill, '_id' | 'status'> {}
+
 export interface HistoryPay {
     _id: string,
     title: string,
