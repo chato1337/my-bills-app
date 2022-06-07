@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 
 const initialCurrency = {
     value: 'COP',
-    label: 'COP'
+    label: 'Colombian Peso (COP)'
 }
 
 export const useCreateBill = () => {

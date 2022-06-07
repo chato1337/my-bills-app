@@ -52,7 +52,7 @@ export class SelectParser {
 
     static genCurrencyOptions = () =>
         Object.values(codes).map((obj) =>
-            ({ value: obj.code, label: obj.code }))
+            ({ value: obj.code, label: `${obj.name} (${obj.code})`}))
     
     static getOptionSelected = (selected:Option | Option[] | null, defaultSel: string):string => {
         if (typeof selected === 'object' && selected !== null) {
