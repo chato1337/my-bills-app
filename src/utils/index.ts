@@ -1,5 +1,6 @@
 import { BarChartType } from "../models/BarChart"
 import { HistoryPay, PayAppend } from "../models/Bill"
+import { User } from '../models/User';
 
 export class ParserNumber {
     static colDecimals = (value: number) => {
@@ -13,6 +14,39 @@ export class BuildTextUtil {
         const parseValue = ParserNumber.colDecimals(value)
 
         return `${date} - ${parseValue} ${money} - ${concept}`
+    }
+}
+
+export class QueryUtils {
+    static getQueryParam = (query: any) => {
+        const { queryKey } = query
+        const param = queryKey[1]
+
+        return param
+    }
+
+    static getQueryToken = (token?: string) => {
+        const authToken = token ?? 'no-token'
+
+        return {
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+                ApiKey: process.env.REACT_APP_API_KEY ?? 'no-api'
+            }
+        }
+    }
+}
+
+export class SelectParser {
+    static genUserOptions = (userList: User[] | null) => {
+        if (userList) {
+            return userList.map((user: User) => ({
+                label: user.username,
+                value: user._id
+            }))
+        }else {
+            return null
+        }
     }
 }
 

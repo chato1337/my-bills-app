@@ -1,6 +1,7 @@
 import { AddPay, ApprovePay, CreateBillDTO } from './../models/Bill';
 import axios from 'axios'
 import { User, GetUserResponse } from '../models/User';
+import { QueryUtils } from '../utils/index';
 
 const baseUrl = process.env.REACT_APP_API_URL
 
@@ -48,13 +49,23 @@ export class Auth {
             : console.log(query)
     }
 
-    static createAccount = (newUser: User) => axios.post(baseUrl+'signup', newUser) 
+    static createAccount = (newUser: User) => axios.post(baseUrl+'signup', newUser)
+
+    static getUsers = async (query: any) => {
+        const token = QueryUtils.getQueryParam(query)
+
+        if(token){
+            const res = await axios.get(baseUrl+`customers`, QueryUtils.getQueryToken(token))
+            return res.data
+        }else {
+            return []
+        }
+    }
 }
 
 export class UserProfile {
     static getProfile = async (query: any) => {
-        const { queryKey } = query
-        const userId = queryKey[1]
+        const userId = QueryUtils.getQueryParam(query)
         if (userId) {
             const res = await axios.get(baseUrl+`profile?id=${userId}`)
             return res.data

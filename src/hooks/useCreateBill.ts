@@ -7,12 +7,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../app/store';
 import { setShowForm } from '../redux/settingsSlice';
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useOwnerSelect } from './userOwnerSelect';
 
 export const useCreateBill = () => {
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
     const showForm = useSelector((state: RootState) => state.settings.showForm)
     const user = useSelector((state: RootState) => state.auth.user)
+    const { userOptions, handleChangeUser, selectedUser } = useOwnerSelect()
 
     const notify = (msj: string) => toast(msj, { autoClose: 5000 })
 
@@ -26,7 +28,7 @@ export const useCreateBill = () => {
 
 	const onSubmit: SubmitHandler<CreateBillDTO> = (data) => {
         const id = user?._id ?? ''
-        const billDTO = { ...data, user_id: id }
+        const billDTO = { ...data, user_id: id, owner: selectedUser }
         handleCreateBill(billDTO)
     };
 
@@ -55,6 +57,9 @@ export const useCreateBill = () => {
         onSubmit,
         register,
         handleSubmit,
-        errors
+        errors,
+        userOptions,
+        handleChangeUser,
+        selectedUser
     }
 }

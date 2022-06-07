@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../app/store";
 import { LoginUser } from "../models/User";
-import { resetUser, setUser } from "../redux/authSlice";
+import { resetToken, resetUser, setToken, setUser } from "../redux/authSlice";
 import { UserService } from "../services/User.service";
 import { useMutation } from 'react-query';
 import { Auth } from "../services/Api";
@@ -42,11 +42,15 @@ export const useAuth = () => {
 		const { data } = response
 		dispatch(setUser(data.user));
 		UserService.store(data.user);
+		dispatch(setToken(data.token))
+		UserService.storeToken(data.token)
 	};
 
 	const handleLogout = () => {
 		dispatch(resetUser())
 		UserService.removeUser()
+		dispatch(resetToken())
+		UserService.removeToken()
 	};
 
 	useEffect(() => {
@@ -69,6 +73,6 @@ export const useAuth = () => {
 		handleSubmit,
 		errors,
 		reset,
-		errorForm
+		errorForm,
     }
 };
