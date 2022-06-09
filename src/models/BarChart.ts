@@ -1,5 +1,6 @@
 export interface BarChartType {
     id: string,
     name: string,
-    value: number
+    value: number,
+    concept: string
 }

@@ -17,7 +17,7 @@ const BillBarchart = () => {
     const [ maxValue, setMaxValue ] = useState(0)
     const { width: widthScreen } = useWindowDimensions()
     // const chartData = ChartDataUtil.getBarData(historyData)
-    const addValue = 100000
+    const addValue = ChartDataUtil.getMaxDataValue(historyData ?? []) * 0.20
     // const maxValue = ChartDataUtil.getMaxDataValue(historyData, addValue)
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const BillBarchart = () => {
             setChartData(null)
             setMaxValue(0)
         }
-    }, [isSuccess, currentBillSelected, historyData])
+    }, [isSuccess, currentBillSelected, historyData, addValue])
 
     return (
         <div className="barchart-container">
@@ -37,13 +37,13 @@ const BillBarchart = () => {
                 isSuccess && chartData && (
                     <BarChart width={widthScreen - 50} height={250} data={chartData}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <XAxis dataKey="name" fontSize={10} />
                         <YAxis type="number" domain={[ 0, maxValue ]} />
                         <Tooltip />
                         <Legend />
                         <Bar stackId="a" dataKey="value" >
                             {chartData.map((entry) => (
-                                <Cell key={entry.id} fill={entry.name === "pay" ? '#2FC3BC' : '#FA8144' }/>
+                                <Cell key={entry.id} fill={entry.concept === "pay" ? '#2FC3BC' : '#FA8144' }/>
                             ))}
                         </Bar>
                     </BarChart>

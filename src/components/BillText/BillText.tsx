@@ -16,7 +16,6 @@ const BillText = ({ currentSelected }: BillTextProps) => {
 				{textValue}
 				<span>{ currentSelected?.money }</span>
 			</p>
-			<label>{ currentSelected?.concept }</label>
 		</div>
 	);
 };

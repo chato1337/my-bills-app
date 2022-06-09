@@ -63,16 +63,17 @@ export class ChartDataUtil {
     static getBarData = (data: HistoryPay[]):BarChartType[] => {
 
         const barData = data.map((dataItem: HistoryPay):BarChartType => {
-            const { concept, value } = dataItem
+            const { concept, value, date } = dataItem
 
             return {
                 "id": dataItem._id,
-                "name": concept,
+                "name": `${concept} - ${date}`,
+                "concept": concept,
                 "value": value
             }
         })
 
-        return barData
+        return barData.slice(0, 8)
     }
 
     static getMaxDataValue = (data: HistoryPay[], addValue = 0):number => {

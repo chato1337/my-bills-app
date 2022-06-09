@@ -34,6 +34,7 @@ const Debtor = () => {
 				{isLoading && <LoadingSpinner />}
 				{isSuccess && (
 					<div>
+						<h2>{ currentBillSelected?.concept }</h2>
 						<BillText  currentSelected={currentBillSelected} />
 						<div className="actions">
 							<button onClick={() => handleShowForm("pay")}>Pagar Abono</button>
