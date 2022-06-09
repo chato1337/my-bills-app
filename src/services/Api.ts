@@ -1,7 +1,8 @@
-import { AddPay, ApprovePay, CreateBillDTO } from './../models/Bill';
+import { AddPayParams, ApprovePay, CreateBillDTO } from './../models/Bill';
 import axios from 'axios'
 import { User, GetUserResponse } from '../models/User';
 import { QueryUtils } from '../utils/index';
+import { Params } from '../models/index';
 
 const baseUrl = process.env.REACT_APP_API_URL
 
@@ -19,14 +20,16 @@ export class Bills {
     }
 
     static getHistory = async (query: any) => {
-        const { queryKey } = query
-        const billId = queryKey[1]
+        const hasQueryToken: Params = query
+        const billId = QueryUtils.getQueryParam(query)
+        const token = hasQueryToken.queryKey[2] ?? ''
+        const config = QueryUtils.getQueryToken(token)
 
-        if (!billId) {
-            return []
-        }else {
-            const res = await axios.get(`${baseUrl}bill-history?id=${billId}`)
+        if (billId) {
+            const res = await axios.get(`${baseUrl}history?id=${billId}`, config)
             return res.data
+        }else {
+            return []
         }
     }
 
@@ -34,9 +37,9 @@ export class Bills {
         return await axios.post(baseUrl+"approve-pay", toApprove)
     }
 
-    static addPay = async (toPay: AddPay) => {
-        // const toPay = { value: payValue }
-        return await axios.post(baseUrl+"add-pay", toPay)
+    static addPay = async (params: AddPayParams) => {
+        const hasToken = params.token ? params.token : undefined
+        return await axios.post(baseUrl+"add-pay", params.toPay, QueryUtils.getQueryToken(hasToken))
     }
 
     static createBill = async (newBill: CreateBillDTO) => await axios.post(`${baseUrl}add-bill`, newBill)

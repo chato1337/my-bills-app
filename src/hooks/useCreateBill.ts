@@ -48,10 +48,10 @@ export const useCreateBill = () => {
         if (!user) {
             handleChangeCode(initialCurrency)
             handleChangeUser(null)
-            reset()
-            dispatch(setShowForm(false))    
+            // reset()
+            dispatch(setShowForm(false))
         }
-    }, [user, dispatch, handleChangeCode, handleChangeUser, reset])
+    }, [user, dispatch, handleChangeCode, handleChangeUser])
 
 	const onSubmit: SubmitHandler<CreateBillDTO> = (data) => {
         const selUser = SelectParser.getOptionSelected(selectedUser, 'no-user')

@@ -7,8 +7,9 @@ export const useHistoryBill = () => {
 
     const storedBill = useSelector((state: RootState) => state.bill.currentBill)
     const billId = storedBill ? storedBill._id : null
-
-    const { data, isLoading, isSuccess } = useQuery(["bill-history", billId], Bills.getHistory)
+    const token = useSelector((state: RootState) => state.auth.token)
+    
+    const { data, isLoading, isSuccess } = useQuery(["bill-history", billId, token], Bills.getHistory)
 
     return {
         data,

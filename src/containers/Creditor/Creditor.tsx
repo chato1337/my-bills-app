@@ -3,13 +3,13 @@ import CreditorListItem from '../../components/CreditorListItem/CreditorListItem
 import { HistoryPay } from '../../models/Bill';
 import BillText from '../../components/BillText/BillText';
 import './Creditor.styles.scss'
-import { useApproveBill } from '../../hooks/useApproveBill';
+// import { useApproveBill } from '../../hooks/useApproveBill';
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { useBill } from '../../hooks/useBill';
 
 const Creditor = () => {
-    const { ApprovePayToast } = useApproveBill()
+    // const { ApprovePayToast } = useApproveBill()
     const { currentBillSelected } = useBill()
     const { data, isLoading, isSuccess } = useHistoryBill()
 
@@ -29,7 +29,7 @@ const Creditor = () => {
                     })
                 )}
             </ul>
-            <ApprovePayToast />
+            {/* <ApprovePayToast /> */}
         </div>
     )
 }

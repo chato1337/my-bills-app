@@ -4,6 +4,8 @@ import { useMutation, useQueryClient } from "react-query"
 import { ToastContainer, toast } from 'react-toastify';
 import { Bills } from "../services/Api"
 import { useBill } from './useBill';
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store';
 
 export const useBillForm = () => {
     const queryClient = useQueryClient()
@@ -11,6 +13,7 @@ export const useBillForm = () => {
     const [showInput, setShowInput] = useState(false)
     const [isReadOnly, setIsReadOnly] = useState(false)
     const { currentBillSelected } = useBill()
+    const token = useSelector((state:RootState) => state.auth.token)
 
     const notify = (msj: string) => toast(msj, { autoClose: 5000 })
 
@@ -20,7 +23,7 @@ export const useBillForm = () => {
             // console.log(variables)
             // console.log(context)
             queryClient.refetchQueries()
-            notify(`el abono por ${variables.value} ha sido enviado!`)
+            notify(`el abono por ${variables.toPay.value} ha sido enviado!`)
         }
     })
 
@@ -28,7 +31,6 @@ export const useBillForm = () => {
 
     const handleShowForm = (action:string) => {
         if(action === 'payAll') {
-            
             setIsReadOnly(true)
             if(currentBillSelected) setInputValue(currentBillSelected.value)
             setConcept(action)
@@ -58,7 +60,7 @@ export const useBillForm = () => {
         if(inputValue && inputValue <= 0) return alert('el valor no puede ser 0')
         if(currentBillSelected) {
             const toPay:AddPay = { id: currentBillSelected._id, value: inputValue as number, concept: typeConcept }
-            mutate(toPay)
+            mutate({toPay, token})
         }
         handleCancel()
     }

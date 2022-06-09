@@ -4,7 +4,7 @@ import { HistoryPay } from "../../models/Bill";
 import BillText from "../../components/BillText/BillText";
 import "./Debtor.styles.scss";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { BuildTextUtil } from "../../utils";
+import { ParserNumber } from "../../utils";
 import BillBarchart from "../../components/BillBarChart/BillBarchart";
 import { useBill } from '../../hooks/useBill';
 
@@ -46,6 +46,7 @@ const Debtor = () => {
 									onChange={(e) => handleInput(e)}
 									value={inputValue}
 									type="number"
+									min="0"
 									{...readOnly}
 								/>
 								<button onClick={handleCancel}>Cancelar</button>
@@ -66,8 +67,9 @@ const Debtor = () => {
                             <ul>
                                 {
                                     historyData.map((item:HistoryPay) => {
-                                        const { _id, title, append } = item
-                                        const text = `${title} ${BuildTextUtil.billText(append)}`
+										const { _id, date, value, currency, concept, status } = item
+										const parseValue = ParserNumber.colDecimals(value)
+                                        const text = `${status} - ${date} - ${parseValue} ${currency} - ${concept}`
                                         return(
                                             <li key={_id}>{ text }</li>
                                         )

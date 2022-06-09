@@ -14,18 +14,18 @@ export interface CreateBillDTO extends Omit<Bill, '_id' | 'status'> {}
 
 export interface HistoryPay {
     _id: string,
-    title: string,
-    body: string,
-    footer: string,
-    color: string,
-    append: PayAppend
+    bill_id: string,
+    owner_id: string,
+    concept: 'pay' | 'payAll' | 'credit',
+    date: string,
+    value: number,
+    currency: string,
+    status: string
 }
 
-export interface PayAppend {
-    concept: string,
-    date: string,
-    money: string,
-    value: number
+export interface AddPayParams {
+    toPay: AddPay,
+    token: string | null
 }
 
 export interface AddPay {

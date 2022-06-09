@@ -1,8 +1,17 @@
 import { useAuth } from '../../hooks/useAuth';
 import './Login.styles.scss'
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Login = () => {
-  const { handleSubmit, onSubmit, errors, register, errorForm } = useAuth()
+  const { handleSubmit, onSubmit, errors, register, errorForm, user } = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user) {
+      navigate(`/debtor`, { replace: true });
+    }
+  }, [user, navigate])
 
   return (
     <div className='login-container' >

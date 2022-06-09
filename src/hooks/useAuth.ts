@@ -43,20 +43,21 @@ export const useAuth = () => {
 		UserService.store(data.user);
 		dispatch(setToken(data.token))
 		UserService.storeToken(data.token)
+		navigate(`/debtor`, { replace: true });
 	};
-
+	
 	const handleLogout = () => {
 		dispatch(resetUser())
 		UserService.removeUser()
 		dispatch(resetToken())
 		UserService.removeToken()
+		navigate(`/login`, { replace: true });
 	};
 
-	useEffect(() => {
-		if (user) {
-			navigate(`/debtor`, { replace: true });
-		}
-	}, [user, navigate]);
+	// useEffect(() => {
+	// 	if (user) {
+	// 	}
+	// }, [user, navigate]);
 
 	useEffect(() => {
         if (UserService.getUser()) {
@@ -73,5 +74,6 @@ export const useAuth = () => {
 		errors,
 		reset,
 		errorForm,
+		user
     }
 };

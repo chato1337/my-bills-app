@@ -1,25 +1,17 @@
 import { BarChartType } from "../models/BarChart"
-import { HistoryPay, PayAppend } from "../models/Bill"
+import { HistoryPay } from "../models/Bill"
 import { User } from '../models/User';
 import codes from './currencyCodes.json'
 import { Option } from '../hooks/useSelect'
+import { Params } from '../models/index';
 export class ParserNumber {
     static colDecimals = (value: number) => {
         return new Intl.NumberFormat("es-CO").format(value)
     }
 }
 
-export class BuildTextUtil {
-    static billText = (data: PayAppend) => {
-        const { date, value, money, concept } = data
-        const parseValue = ParserNumber.colDecimals(value)
-
-        return `${date} - ${parseValue} ${money} - ${concept}`
-    }
-}
-
 export class QueryUtils {
-    static getQueryParam = (query: any) => {
+    static getQueryParam = (query: Params) => {
         const { queryKey } = query
         const param = queryKey[1]
 
@@ -71,7 +63,7 @@ export class ChartDataUtil {
     static getBarData = (data: HistoryPay[]):BarChartType[] => {
 
         const barData = data.map((dataItem: HistoryPay):BarChartType => {
-            const { concept, value } = dataItem.append
+            const { concept, value } = dataItem
 
             return {
                 "id": dataItem._id,
@@ -85,6 +77,6 @@ export class ChartDataUtil {
 
     static getMaxDataValue = (data: HistoryPay[], addValue = 0):number => {
 
-        return Math.max.apply(Math, data.map((item:HistoryPay) => item.append.value)) + addValue
+        return Math.max.apply(Math, data.map((item:HistoryPay) => item.value)) + addValue
     }
 }
