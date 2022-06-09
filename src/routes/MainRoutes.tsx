@@ -4,10 +4,11 @@ import ProtectedRoute from "../containers/ProtectedRoute/ProtectedRoute";
 import NotFound from "../components/NotFound/NotFound";
 import Bills from "../containers/Bills/Bills";
 import Navbar from "../components/Navbar/Navbar";
-import Creditor from "../containers/Creditor/Creditor";
 import Debtor from "../containers/Debtor/Debtor";
 import Register from '../containers/Register/Register';
 import Profile from "../components/Profile/Profile";
+import CreditorList from '../containers/CreditorList/CreditorList';
+import Creditor from '../components/Creditor/Creditor';
 
 const MainRoutes = () => {
 	return (
@@ -31,13 +32,19 @@ const MainRoutes = () => {
 					path="creditor"
 					element={
 						<ProtectedRoute>
-							<Creditor />
+							<CreditorList />
 						</ProtectedRoute>
 					}
 				/>
 				<Route path="detail" element={
 					<ProtectedRoute>
 						<Debtor />
+					</ProtectedRoute>
+				} />
+
+				<Route path="creditor-detail" element={
+					<ProtectedRoute>
+						<Creditor />
 					</ProtectedRoute>
 				} />
 				<Route path="*" element={<NotFound />} />

@@ -1,4 +1,4 @@
-import { AddPayParams, ApprovePay, CreateBillDTO } from './../models/Bill';
+import { AddPayParams, ApprovePayParams, CreateBillDTO } from './../models/Bill';
 import axios from 'axios'
 import { User, GetUserResponse } from '../models/User';
 import { QueryUtils } from '../utils/index';
@@ -19,12 +19,25 @@ export class Bills {
         }
     }
 
-    static getHistory = async (query: any) => {
+    static getCreditorBills = async (query: any) => {
         const hasQueryToken: Params = query
         const billId = QueryUtils.getQueryParam(query)
         const token = hasQueryToken.queryKey[2] ?? ''
         const config = QueryUtils.getQueryToken(token)
 
+        if (billId) {
+            const res = await axios.get(`${baseUrl}history-list?id=${billId}`, config)
+            return res.data
+        }else {
+            return []
+        }
+    } 
+
+    static getHistory = async (query: any) => {
+        const hasQueryToken: Params = query
+        const billId = QueryUtils.getQueryParam(query)
+        const token = hasQueryToken.queryKey[2] ?? ''
+        const config = QueryUtils.getQueryToken(token)
         if (billId) {
             const res = await axios.get(`${baseUrl}history?id=${billId}`, config)
             return res.data
@@ -33,8 +46,9 @@ export class Bills {
         }
     }
 
-    static approvePay = async (toApprove: ApprovePay) => {
-        return await axios.post(baseUrl+"approve-pay", toApprove)
+    static approvePay = async (params: ApprovePayParams) => {
+        const hasToken = params.token ? params.token : undefined
+        return await axios.post(baseUrl+"approve-pay", params.toApprove, QueryUtils.getQueryToken(hasToken))
     }
 
     static addPay = async (params: AddPayParams) => {

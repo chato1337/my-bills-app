@@ -12,7 +12,7 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const BillBarchart = () => {
     const { currentBillSelected } = useBill()
-    const { data: historyData, isSuccess } = useHistoryBill()
+    const { data: historyData, isSuccess } = useHistoryBill(currentBillSelected?._id ?? null)
     const [ chartData, setChartData ] = useState<BarChartType[] | null>(null)
     const [ maxValue, setMaxValue ] = useState(0)
     const { width: widthScreen } = useWindowDimensions()

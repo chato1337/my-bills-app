@@ -1,4 +1,4 @@
-import Creditor from '../Creditor/Creditor';
+import Creditor from '../../components/Creditor/Creditor';
 import Debtor from '../Debtor/Debtor';
 
 type DetailNavigationProps = {

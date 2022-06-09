@@ -34,6 +34,11 @@ export interface AddPay {
     concept: string
 }
 
+export interface ApprovePayParams {
+    toApprove: ApprovePay,
+    token: string | null
+}
+
 export interface ApprovePay {
     id: string,
     value: number,

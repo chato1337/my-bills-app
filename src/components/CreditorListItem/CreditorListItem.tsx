@@ -14,7 +14,6 @@ const CreditorListItem = ({ data }: CreditorListItemProps) => {
     const parseValue = ParserNumber.colDecimals(value)
     const text = `${status} ${date} - ${parseValue} ${currency} - ${concept}`
 
-
     const { handleChange, handleSubmit } = useApproveBill()
 
     return (
@@ -23,8 +22,8 @@ const CreditorListItem = ({ data }: CreditorListItemProps) => {
             { !isCompleted && (
                 <div>
                     <select name="action-select" onChange={handleChange}>
-                        <option value="Aprobar">Aprobar</option>
-                        <option value="Rechazar">Rechazar</option>
+                        <option value="approve">Aprobar</option>
+                        <option value="reject">Rechazar</option>
                     </select>
                     <button onClick={() => handleSubmit(_id, value)}><BiSave size={23} /> </button>
                 </div>

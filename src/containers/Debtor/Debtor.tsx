@@ -20,13 +20,13 @@ const Debtor = () => {
 		concept
 	} = useBillForm();
 
-	const { isLoading, isSuccess } = useBill()
+	const { isLoading, isSuccess, currentBillSelected } = useBill()
 
 	const {
 		data: historyData,
 		isLoading: isLoadingHistory,
 		isSuccess: isSuccessHistory,
-	} = useHistoryBill();
+	} = useHistoryBill(currentBillSelected?._id ?? null);
 
 	return (
 		<div>
@@ -34,7 +34,7 @@ const Debtor = () => {
 				{isLoading && <LoadingSpinner />}
 				{isSuccess && (
 					<div>
-						<BillText />
+						<BillText  currentSelected={currentBillSelected} />
 						<div className="actions">
 							<button onClick={() => handleShowForm("pay")}>Pagar Abono</button>
 							<button onClick={() => handleShowForm("credit")}>Realizar Credito</button>

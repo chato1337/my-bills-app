@@ -3,10 +3,12 @@ import { Bill } from '../models/Bill';
 
 export interface BillState {
 	currentBill: Bill | null;
+	currentCredit: Bill | null
 }
 
 const initialState: BillState = {
 	currentBill: null,
+	currentCredit: null
 };
 
 export const counterSlice = createSlice({
@@ -20,13 +22,19 @@ export const counterSlice = createSlice({
 			// immutable state based off those changes
 			state.currentBill = action.payload;
 		},
+		setCurrentCreditor: (state, action: PayloadAction<Bill>) => {
+			state.currentCredit = action.payload
+		},
 		resetBillSelected: (state) => {
+			state.currentBill = null
+		}, 
+		resetCreditSelected: (state) => {
 			state.currentBill = null
 		}, 
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setCurrentBill, resetBillSelected } = counterSlice.actions;
+export const { setCurrentBill, resetBillSelected, setCurrentCreditor, resetCreditSelected } = counterSlice.actions;
 
 export default counterSlice.reducer;

@@ -1,23 +1,24 @@
 import { useHistoryBill } from '../../hooks/useHistoryBill'
-import CreditorListItem from '../../components/CreditorListItem/CreditorListItem';
+import CreditorListItem from '../CreditorListItem/CreditorListItem';
 import { HistoryPay } from '../../models/Bill';
-import BillText from '../../components/BillText/BillText';
+import BillText from '../BillText/BillText';
 import './Creditor.styles.scss'
 // import { useApproveBill } from '../../hooks/useApproveBill';
 import 'react-toastify/dist/ReactToastify.css';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import { useBill } from '../../hooks/useBill';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import { useCreditor } from '../../hooks/useCreditor';
 
 const Creditor = () => {
     // const { ApprovePayToast } = useApproveBill()
-    const { currentBillSelected } = useBill()
-    const { data, isLoading, isSuccess } = useHistoryBill()
+    // const { currentBillSelected } = useBill()
+    const { currentCredit } = useCreditor()
+    const { data, isLoading, isSuccess } = useHistoryBill(currentCredit?._id ?? null)
 
     return (
         <div className="creditor-container">
             <h1>creditor screen</h1>
-            <h2>{ currentBillSelected?.concept }</h2>
-            <BillText />
+            <h2>{ currentCredit?.concept }</h2>
+            <BillText currentSelected={currentCredit} />
             <ul>
                 { isLoading &&  <LoadingSpinner />}
                 { isSuccess && (
