@@ -9,13 +9,18 @@ import Register from '../containers/Register/Register';
 import Profile from "../components/Profile/Profile";
 import CreditorList from '../containers/CreditorList/CreditorList';
 import Creditor from '../components/Creditor/Creditor';
+import { useCreateBill } from "../hooks/useCreateBill";
+import BillForm from "../components/BillForm/BillForm";
+import { useBillForm } from "../hooks/useFormBill";
 
 const MainRoutes = () => {
+	const { showForm } = useCreateBill()
+
 	return (
 		<BrowserRouter>
 			<Navbar />
 			<Profile />
-
+			<ToastWrapper />
 			<Routes>
 				<Route index element={<Login />} />
 				<Route path="login" element={<Login />} />
@@ -49,8 +54,17 @@ const MainRoutes = () => {
 				} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
+		{
+			showForm && <BillForm />
+		}
 		</BrowserRouter>
 	);
 };
 
 export default MainRoutes;
+
+const ToastWrapper = () => {
+	const { BillFormToast } = useBillForm()
+	
+	return <BillFormToast /> 
+}

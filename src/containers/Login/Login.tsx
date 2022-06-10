@@ -1,6 +1,6 @@
 import { useAuth } from '../../hooks/useAuth';
 import './Login.styles.scss'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
       { errorForm && <label className='error-msg'>Invalid username or password</label> }
       <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
-          <label htmlFor="email">Username</label>
+          <label htmlFor="username">Username:</label>
           <input className={errors.username && 'error'} type="text" id='username' {...register("username", { required: true })} />
         </div>
         <div className="form-group">
@@ -28,6 +28,9 @@ const Login = () => {
         </div>
         <button>Login</button>
       </form>
+      <div className="register-link">
+        <Link to={'/register'}>Create Account</Link>
+      </div>
     </div>
   )
 }

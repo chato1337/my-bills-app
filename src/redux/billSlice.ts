@@ -29,7 +29,7 @@ export const counterSlice = createSlice({
 			state.currentBill = null
 		}, 
 		resetCreditSelected: (state) => {
-			state.currentBill = null
+			state.currentCredit = null
 		}, 
 	},
 });

@@ -1,7 +1,7 @@
 {
   "homepage": "https://chato1337.github.io/",
   "name": "my-bills",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",

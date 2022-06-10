@@ -1,12 +1,14 @@
 import { useRegister } from '../../hooks/useRegister';
+import './Register.styles.scss'
+import { Link } from 'react-router-dom';
 
 const Register = () => {
 
     const { register, handleSubmit, errors, onSubmit } = useRegister()
 
     return (
-        <div>
-            <form className="register-contaier" onSubmit={handleSubmit(onSubmit)}>
+        <div className="register-container">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <h2>Create account</h2>
                 <div className="register-form">
                     <div className="form-group">
@@ -24,6 +26,9 @@ const Register = () => {
                     <button>Register</button>
                 </div>
             </form>
+            <div className="login-link">
+                <Link to={'/login'}>Login</Link>
+            </div>
         </div>
     )
 }
