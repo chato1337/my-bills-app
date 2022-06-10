@@ -31,7 +31,6 @@ const BillForm = () => {
 						id="inpuValue"
 						min="0"
 						prefix="$"
-						step="10"
 						{...register("value", { required: true })}
 					/>
 				</div>

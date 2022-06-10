@@ -17,7 +17,6 @@ export const useApproveBill = () => {
             // queryClient.setQueryData(["bill-history", { _id: variables.id }], data.data._doc)
             queryClient.refetchQueries()
             notify(`la transaccion fue ${generateTextResponse(selectValue)} con exito!`)
-            console.log("do something")
         }
     })
 

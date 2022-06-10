@@ -70,7 +70,6 @@ export const useCreateBill = () => {
 
     const { mutate } = useMutation(Bills.createBill, {
         onSuccess: (data, variables, context) => {
-            console.log(variables)
             queryClient.refetchQueries()
             //reset fields
             resetFormfields()

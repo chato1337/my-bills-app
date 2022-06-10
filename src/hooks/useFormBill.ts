@@ -19,9 +19,6 @@ export const useBillForm = () => {
 
     const { mutate } = useMutation(Bills.addPay, {
         onSuccess: (data, variables, context) => {
-            // console.log(data)
-            // console.log(variables)
-            // console.log(context)
             queryClient.refetchQueries()
             notify(`el abono por ${variables.toPay.value} ha sido enviado!`)
         }
