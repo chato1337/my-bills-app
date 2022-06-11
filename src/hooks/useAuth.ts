@@ -8,12 +8,15 @@ import { resetToken, resetUser, setToken, setUser } from "../redux/authSlice";
 import { UserService } from "../services/User.service";
 import { useMutation } from 'react-query';
 import { Auth } from "../services/Api";
+import { usePinInput } from './usePinInput';
 
 export const useAuth = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const user = useSelector((state: RootState) => state.auth.user);
 	const [errorForm, setErrorForm] = useState(false)
+	const { values, handleChangePin, handleCompleteInput, inputValue } = usePinInput()
+
 	//TODO: set mutation variables response types
 	const { mutate } = useMutation(Auth.login, {
 		onSuccess: (variables) => {
@@ -23,8 +26,8 @@ export const useAuth = () => {
 		onError: () => {
 			setErrorForm(true)
 		}
-	})
-	
+	})	
+
 	const {
 		register,
 		handleSubmit,
@@ -34,7 +37,10 @@ export const useAuth = () => {
 	} = useForm<LoginUser>();
 
 	const onSubmit: SubmitHandler<LoginUser> = (formData) => {
-		mutate(formData)
+		if (inputValue) {
+			const data = {...formData, password: inputValue }
+			mutate(data)
+		}
 	}
 
 	const handleLogin = (response: any) => {
@@ -53,12 +59,7 @@ export const useAuth = () => {
 		UserService.removeToken()
 		navigate(`/login`, { replace: true });
 	};
-
-	// useEffect(() => {
-	// 	if (user) {
-	// 	}
-	// }, [user, navigate]);
-
+	
 	useEffect(() => {
         if (UserService.getUser()) {
             dispatch(setUser(UserService.getUser()))
@@ -74,6 +75,9 @@ export const useAuth = () => {
 		errors,
 		reset,
 		errorForm,
-		user
+		user,
+		values,
+		handleChangePin,
+		handleCompleteInput
     }
 };
